@@ -25,8 +25,8 @@ First of all, you need to init and update all bundle submodules.
 Plugins flagged with * needs attention to setup, just follow what README file of the plugin, skiping the vim installation steps.
 It's recommended to you to read how to use each of the listed plugins below.
 
- * [* ack](https://github.com/mileszs/ack.vim)
- * [* vim-powerline](https://github.com/Lokaltog/vim-powerline) - you can install the patched *Iconsolata* font at <code>utils</code> directory.
+ * [* ack](https://github.com/mileszs/ack.vim) - install ack
+ * [* vim-powerline](https://github.com/Lokaltog/vim-powerline) - removed for now you can install the patched *Iconsolata* font at <code>utils</code> directory.
  * [ctrlp](https://github.com/kien/ctrlp.vim)
  * [ctrlp-filetype](https://github.com/endel/ctrlp-filetype.vim)
  * [vim-fugitive](https://github.com/tpope/vim-fugitive)

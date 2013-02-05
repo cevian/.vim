@@ -13,6 +13,10 @@ filetype indent on
 call pathogen#infect()
 call pathogen#helptags()
 
+"poweline
+"python  from powerline.bindings.vim import source_plugin; source_plugin()
+"source /Users/matveyarye/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/plugin/source_plugin.vim
+
 " colors and style
 syntax enable
 
