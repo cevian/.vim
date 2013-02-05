@@ -93,10 +93,19 @@
 	url = https://github.com/chriskempson/vim-tomorrow-theme.git
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
-	url = git://github.com/majutsushi/tagbar.git
+	url = https://github.com/majutsushi/tagbar
 [submodule "bundle/gundo"]
 	path = bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips
+[submodule "bundle/clang_complete"]
+	path = bundle/clang_complete
+	url = git@github.com:Rip-Rip/clang_complete.git
+[submodule "bundle/doxygenToolkit"]
+	path = bundle/doxygenToolkit
+	url = git@github.com:vim-scripts/DoxygenToolkit.vim.git
+[submodule "bundle/AsyncCommand"]
+	path = bundle/AsyncCommand
+	url = git@github.com:pydave/AsyncCommand.git

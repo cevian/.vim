@@ -3,7 +3,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 " No compatible with vi. Who cares about vi?
 set nocompatible
-set shell=zsh
+set shell=bash
 
 "load ftplugins and indent files
 filetype plugin on
@@ -34,20 +34,27 @@ set linespace=3
 
 "set background=light
 set background=dark
-colorscheme Tomorrow-Night-Bright
+"colorscheme Tomorrow-Night-Bright
 "colorscheme solarized
 "colorscheme github
 "colorscheme vividchalk
+colorscheme jellybeans
 
 " style
 set number
 set autoindent
 
-" Set the terminal's title
+" write file on call to make
+set autowrite
+
+set exrc "tells vim to look for additional .vimrc files in the dir where vim
+" is started , needed for project-specific setings.
+
+"Set the terminal's title
 set title
 
 " whitespace
-set nowrap
+"set nowrap
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -74,10 +81,15 @@ set showmode              " Show current mode down the bottom
 
 set ttimeoutlen=50        " Make Esc work faster
 set printoptions=paper:letter
-set foldmethod=marker
+
+
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
+" folding: `za` - toggles `zc` - closes `zo` - opens `zR` - open all `zM` - close all
 
 set laststatus=2          " Always show status line
-set nofoldenable          " Folding sucks
 set scrolloff=5           " Always shows 5 lines above/below the cursor
 
 " Use different colorscheme when are using GUI or console
@@ -122,10 +134,11 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_style_error_symbol = '✠'
 let g:syntastic_warning_symbol = '∆'
 let g:syntastic_style_warning_symbol = '≈'
+let g:syntastic_auto_loc_list = 1
 
 " NERDTree
-let NERDTreeChDirMode=2
-let g:NERDTreeMinimalUI=1
+"let NERDTreeChDirMode=2
+"let g:NERDTreeMinimalUI=1
 
 " CtrlP familiar to Command-T
 silent! nnoremap <unique> <silent> <Leader>t :CtrlP<CR>
@@ -158,7 +171,8 @@ nmap <C-Enter> <C-w><C-]><C-w>T
 nnoremap dgh :diffget //2 \| diffupdate <CR>
 nnoremap dgl :diffget //3 \| diffupdate <CR>
 
-" Add '|' text objects
+" Add '|' text objects, operates between two | operators T for inside, F for
+" All. d,c,y,v all standard vim stuff
 nnoremap di\| T\|d,
 nnoremap da\| F\|d,
 nnoremap ci\| T\|c,
@@ -342,6 +356,14 @@ function! Run()
 endfunction
 command! -bar Run :execute Run()
 
+function! MakeAndError()
+      let winnum =winnr() " get current window number
+      make
+      cw " open the error window if it contains error
+      " return to the window with cursor set on the line of the first error (if any)
+      execute winnum . "wincmd w"
+endfunction
+
 "
 " Custom key mapping
 " ------------------
@@ -367,13 +389,14 @@ nmap <C-s> :w<CR>
 
 " Toggle NERDTree
 map <Leader>l :NERDTreeToggle<CR>
+amenu Shortcuts.NerdTree\ \ \\l :NERDTreeToggle<CR>
 " Open NERDTree
 map <Leader>L :NERDTree<CR>
 
 " ack.vim
-nmap <silent> <unique> <Leader>a :Ack
-nmap <silent> <unique> <Leader>as :AckFromSearch
-nmap <silent> <unique> <Leader>af :AckFile
+"nmap <silent> <unique> <Leader>a :Ack
+"nmap <silent> <unique> <Leader>as :AckFromSearch
+"nmap <silent> <unique> <Leader>af :AckFile
 
 " Copy from cursor to the end of the line
 nnoremap Y  y$
@@ -398,7 +421,7 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 " Utilty
-map <silent> <Leader>s :Gstatus<CR>
+map <silent> <Leader>g :Gstatus<CR>
 
 "map <F3>    :cnext<CR>
 "map <F4>    :cc<CR>
@@ -436,6 +459,31 @@ endif
 " Open .vimrc for quick-edit.
 map <Leader>ev :edit $MYVIMRC<CR>
 map <Leader>v :source $MYVIMRC<CR>
+amenu Shortcuts.Open\ vimrc\ \ \\ev   :edit $MYVIMRC<CR>
+amenu Shortcuts.Source\ vimrc\ \ \\v     :source $MYVIMRC<CR>
+
+noremap <Leader>t :TagbarToggle<CR>
+noremap <Leader>T :TagbarOpen<CR>
+amenu Shortcuts.Tagbar\ \ \\t :TagbarToggle<CR>
+
+noremap <Leader>s :SyntasticCheck<CR>
+noremap <Leader>S :SyntasticToggleMode<CR>
+amenu Shortcuts.Check\ Syntax\ \ \\s :SyntasticCheck<CR>
+amenu Shortcuts.Syntax\ Toggle\ \ \\S :SyntasticToggleMode<CR>
+
+noremap <C-f> gggqG<CR>
+
+"changed to AsyncMake from MakeAndError
+noremap <C-M> :AsyncMake<CR>
+amenu Shortcuts.Format\ Buffer\ \ C-f gggqG<CR>
+amenu Shortcuts.Make\ \ C-f :AsyncMake<CR>
+
+"add ; at end of line in normal/visual mode
+noremap ; :s/\([^;]\)$/\1;/<cr>
+
+
+noremap <C-D> :Dox <CR>
+amenu Shortcuts.Insert\ Dox\ \ C-D :Dox <CR>
 
 " remember last location when open a file
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
@@ -465,3 +513,19 @@ autocmd Bufread,BufNewFile *.proto set filetype=javascript
 " TagList plugin configuration
 " let tlist_tex_settings          = 'latex;s:sections;g:graphics;l:labels'
 " let tlist_make_settings         = 'make;m:makros;t:targets'
+
+"clang complete
+ " SuperTab option for context aware completion
+let g:SuperTabDefaultCompletionType = "context"
+
+ " Disable auto popup, use <Tab> to autocomplete
+let g:clang_complete_auto = 0
+ " Show clang errors in the quickfix window
+let g:clang_complete_copen = 1
+let g:clang_sort_algo = "alpha"
+
+"use library not exec
+let g:clang_use_library = 1
+let g:clang_library_path = "/Users/matveyarye/llvm/build/lib"
+
+
