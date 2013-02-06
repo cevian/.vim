@@ -1,6 +1,10 @@
 " Setup pathogen.vim to autoload bundled plugins
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 
+set backupdir^=~/.vim/tmp//
+set directory^=~/.vim/tmp//
+
+
 " No compatible with vi. Who cares about vi?
 set nocompatible
 set shell=bash
@@ -517,12 +521,20 @@ autocmd Bufread,BufNewFile *.proto set filetype=javascript
 "clang complete
  " SuperTab option for context aware completion
 let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabClosePreviewOnPopupClose = 1
 
- " Disable auto popup, use <Tab> to autocomplete
-let g:clang_complete_auto = 0
+ " Complete options (disable preview scratch window)
+ "set completeopt = menu,menuone,longest
+ " Limit popup menu height
+" set pumheight = 15
+
+ " If 0 then disable auto popup, use <Tab> to autocomplete
+let g:clang_complete_auto = 1
  " Show clang errors in the quickfix window
 let g:clang_complete_copen = 1
 let g:clang_sort_algo = "alpha"
+" close preview after completion
+let g:clang_close_preview = 1
 
 "use library not exec
 let g:clang_use_library = 1
