@@ -102,13 +102,13 @@
 	url = https://github.com/SirVer/ultisnips
 [submodule "bundle/clang_complete"]
 	path = bundle/clang_complete
-	url = git@github.com:Rip-Rip/clang_complete.git
+	url = https://github.com/Rip-Rip/clang_complete.git
 [submodule "bundle/doxygenToolkit"]
 	path = bundle/doxygenToolkit
-	url = git@github.com:vim-scripts/DoxygenToolkit.vim.git
+	url = https://github.com/vim-scripts/DoxygenToolkit.vim.git
 [submodule "bundle/AsyncCommand"]
 	path = bundle/AsyncCommand
-	url = git@github.com:pydave/AsyncCommand.git
+	url = https://github.com/pydave/AsyncCommand.git
 [submodule "bundle/vim-powerline"]
 	path = bundle/vim-powerline
-	url = git@github.com:Lokaltog/vim-powerline.git
+	url = https://github.com/Lokaltog/vim-powerline.git
