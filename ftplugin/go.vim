@@ -1,1 +1,1 @@
-setlocal ai ts=8 sw=8 noexpandtab
+setlocal ai ts=4 sw=4 sts=4 noexpandtab
