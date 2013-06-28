@@ -112,3 +112,9 @@
 [submodule "bundle/vim-powerline"]
 	path = bundle/vim-powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule "bundle/vim-golang"]
+	path = bundle/vim-golang
+	url = https://github.com/jnwhiteh/vim-golang.git
+[submodule "bundle-like/gocode"]
+	path = bundle-like/gocode
+	url = https://github.com/nsf/gocode.git

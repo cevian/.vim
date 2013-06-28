@@ -514,6 +514,9 @@ autocmd FileType text,markdown setlocal linebreak nowrap textwidth=80
 " Google protocol buffers
 autocmd Bufread,BufNewFile *.proto set filetype=javascript
 
+" GO use gofmt
+autocmd FileType go autocmd BufWritePre <buffer> silent Fmt
+
 " TagList plugin configuration
 " let tlist_tex_settings          = 'latex;s:sections;g:graphics;l:labels'
 " let tlist_make_settings         = 'make;m:makros;t:targets'
