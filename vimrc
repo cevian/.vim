@@ -4,6 +4,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 set backupdir^=~/.vim/tmp//
 set directory^=~/.vim/tmp//
 
+set shellredir=2>&1\|tee\ %s
 
 " No compatible with vi. Who cares about vi?
 set nocompatible
@@ -12,6 +13,16 @@ set shell=bash
 "load ftplugins and indent files
 filetype plugin on
 filetype indent on
+
+
+let g:pathogen_disabled = []
+
+if !has('gui_running')
+      call add(g:pathogen_disabled, 'AsyncCommand')
+endif
+if !has('python')
+      call add(g:pathogen_disabled, 'ultisnips')
+endif
 
 " load all bundles
 call pathogen#infect()
@@ -36,13 +47,15 @@ else
 endif
 set linespace=3
 
-"set background=light
-set background=dark
-"colorscheme Tomorrow-Night-Bright
-"colorscheme solarized
-"colorscheme github
-"colorscheme vividchalk
-colorscheme jellybeans
+if has("gui_running")
+  "set background=light
+  set background=dark
+  "colorscheme Tomorrow-Night-Bright
+  "colorscheme solarized
+  "colorscheme github
+  "colorscheme vividchalk
+  colorscheme jellybeans
+endif
 
 " style
 set number
@@ -475,12 +488,16 @@ noremap <Leader>S :SyntasticToggleMode<CR>
 amenu Shortcuts.Check\ Syntax\ \ \\s :SyntasticCheck<CR>
 amenu Shortcuts.Syntax\ Toggle\ \ \\S :SyntasticToggleMode<CR>
 
+let g:UltiSnipsEditSplit = "horizontal"
+amenu Shortcuts.Edit\ Ultisnips  :UltiSnipsEdit<CR>
+
 noremap <C-f> gggqG<CR>
 
 "changed to AsyncMake from MakeAndError
-noremap <C-M> :AsyncMake<CR>
+"noremap <C-M> :AsyncMake<CR>
+noremap <C-M>:execute MakeAndError()<CR>
 amenu Shortcuts.Format\ Buffer\ \ C-f gggqG<CR>
-amenu Shortcuts.Make\ \ C-f :AsyncMake<CR>
+amenu Shortcuts.Make\ \ C-m :execute MakeAndError()<CR>
 
 "add ; at end of line in normal/visual mode
 noremap ; :s/\([^;]\)$/\1;/<cr>
@@ -494,7 +511,7 @@ autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
       \| exe "normal g'\"" | endif
 
 " Remove white spaces on write
-autocmd BufWritePre * :call <SID>RemoveWhitespaces()
+"autocmd BufWritePre * :call <SID>RemoveWhitespaces()
 
 " Git commits: check word spelling
 autocmd FileType gitcommit setlocal spell
@@ -532,7 +549,7 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 " set pumheight = 15
 
  " If 0 then disable auto popup, use <Tab> to autocomplete
-let g:clang_complete_auto = 1
+let g:clang_complete_auto = 0
  " Show clang errors in the quickfix window
 let g:clang_complete_copen = 1
 let g:clang_sort_algo = "alpha"

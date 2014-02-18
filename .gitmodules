@@ -118,3 +118,6 @@
 [submodule "bundle-like/gocode"]
 	path = bundle-like/gocode
 	url = https://github.com/nsf/gocode.git
+[submodule "bundle/go-def"]
+	path = bundle/go-def
+	url = https://github.com/dgryski/vim-godef
