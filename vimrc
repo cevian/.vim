@@ -4,8 +4,6 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 set backupdir^=~/.vim/tmp//
 set directory^=~/.vim/tmp//
 
-set shellredir=2>&1\|tee\ %s
-
 " No compatible with vi. Who cares about vi?
 set nocompatible
 set shell=bash
@@ -495,7 +493,7 @@ noremap <C-f> gggqG<CR>
 
 "changed to AsyncMake from MakeAndError
 "noremap <C-M> :AsyncMake<CR>
-noremap <C-M>:execute MakeAndError()<CR>
+noremap <C-m> :execute MakeAndError()<CR>
 amenu Shortcuts.Format\ Buffer\ \ C-f gggqG<CR>
 amenu Shortcuts.Make\ \ C-m :execute MakeAndError()<CR>
 
@@ -533,6 +531,7 @@ autocmd Bufread,BufNewFile *.proto set filetype=javascript
 
 " GO use gofmt
 autocmd FileType go autocmd BufWritePre <buffer> silent Fmt
+autocmd FileType go compiler go
 
 " TagList plugin configuration
 " let tlist_tex_settings          = 'latex;s:sections;g:graphics;l:labels'
