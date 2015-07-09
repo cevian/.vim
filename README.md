@@ -21,7 +21,7 @@ First of all, you need to init and update all bundle submodules.
 
     $ git submodule update --init
     $ go get -u github.com/nsf/gocode //move gocode binary to PATH
-    $ go get -v code.google.com/p/rog-go/exp/cmd/godef //move godef binary to PATH
+    $ go get -u github.com/rogpeppe/godef //move godef binary to PATH
     $ go get -u github.com/jstemmer/gotags //mv gotags binary to PATH
 
 
