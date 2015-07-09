@@ -14,6 +14,19 @@ you project's root path, and all the others plugins will follow it, such as
 [bufexplorer](https://github.com/corntrace/bufexplorer), etc.
 
 
+Installing Vim
+---
+
+  $ brew install python
+  $ brew install vim --with-python --with-ruby --with-perl
+  $ brew install macvim --env-std --override-system-vim
+  $ pip install powerline-status
+
+Then install the font found here on your vim
+`https://github.com/powerline/fonts/blob/master/Inconsolata/Inconsolata%20for%20Powerline.otf`
+
+
+
 Plugins Setup
 ---
 

@@ -13,7 +13,7 @@ filetype plugin on
 filetype indent on
 
 
-let g:pathogen_disabled = []
+let g:pathogen_disabled = ['vim-powerline']
 
 if !has('gui_running')
       call add(g:pathogen_disabled, 'AsyncCommand')
@@ -559,4 +559,23 @@ let g:clang_close_preview = 1
 let g:clang_use_library = 1
 let g:clang_library_path = "/Users/matveyarye/llvm/build/lib"
 
+"poweline setup below:
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+
+set guifont=Inconsolata\ for\ Powerline:h15
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+set term=xterm-256color
+set termencoding=utf-8
+
+if has("gui_running")
+   let s:uname = system("uname")
+   if s:uname == "Darwin\n"
+      set guifont=Inconsolata\ for\ Powerline:h15
+   endif
+endif
 
