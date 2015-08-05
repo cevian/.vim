@@ -22,6 +22,10 @@ Installing Vim
     $ brew install macvim --env-std --override-system-vim
     $ pip install powerline-status
 
+For the tagbar plugin:
+
+    $ brew install ctags-exuberant 
+
 Then install the font found here on your vim
 `https://github.com/powerline/fonts/blob/master/Inconsolata/Inconsolata%20for%20Powerline.otf`
 
